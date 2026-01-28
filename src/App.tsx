@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ButtonSelectionScreen from './components/ButtonSelectionScreen';
 import VideoPlayerScreen from './components/VideoPlayerScreen';
 import type { Screen } from './types';
@@ -6,6 +6,20 @@ import type { Screen } from './types';
 function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('buttons');
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
+
+  // Disable right-click context menu
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+      return false;
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
 
   const handleSelectVideo = (videoNumber: number) => {
     setSelectedVideo(videoNumber);

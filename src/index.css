@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Disable text selection */
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 @keyframes press-in {
   0% {
     transform: scale(1);
